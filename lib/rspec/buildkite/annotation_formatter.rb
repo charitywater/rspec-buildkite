@@ -63,6 +63,10 @@ module RSpec::Buildkite
       %{<summary>#{notification.description.encode(:xml => :text)}</summary>\n} <<
       %{<pre class="term">#{Recolorizer.recolorize(notification.colorized_message_lines.join("\n").encode(:xml => :text))}</pre>\n} <<
       format_rerun(notification) <<
+      %{<details>\n} <<
+      %{<summary>Stack Trace</summary>\n} <<
+      %{<pre class="term">#{notification.formatted_backtrace.join("\n").encode(:xml => :text)}</pre>\n} <<
+      %{</details>\n} <<
       %{<p>in <a href=#{job_url.encode(:xml => :attr)}>Job ##{job_id.encode(:xml => :text)}</a></p>\n} <<
       %{</details>} <<
       %{\n\n\n}
