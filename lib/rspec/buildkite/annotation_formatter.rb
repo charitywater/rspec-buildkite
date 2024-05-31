@@ -27,7 +27,7 @@ module RSpec::Buildkite
     end
 
     def example_failed(notification)
-      return if @queue.nil? || RSpec.world.wants_to_quit
+      return if @queue.nil? || RSpec.world.wants_to_quit || FLAKY_EXAMPLES.include?(notification.example)
 
       @queue.push(notification)
     end
